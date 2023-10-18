@@ -9,4 +9,8 @@ class Binding extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    
+    public function book(){
+        return $this->hasOne(Book::class);
+    }
 }

@@ -9,4 +9,8 @@ class Size extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+    
+    public function book(){
+        return $this->hasOne(Book::class);
+    }
 }

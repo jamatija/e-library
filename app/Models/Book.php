@@ -10,6 +10,8 @@ class Book extends Model
     use HasFactory;
 
     const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
+    
+    protected $fillable = ['title', 'isbn', 'total_count', 'page_count', 'publish_date', 'description'];
 
     public function authors()
     {
@@ -24,5 +26,21 @@ class Book extends Model
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
+    }
+    
+    public function size(){
+        return $this->belongsTo(Size::class);
+    }
+    
+    public function script(){
+        return $this->belongsTo(Script::class);
+    }
+    
+    public function publisher(){
+        return $this->belongsTo(Publisher::class);
+    }
+    
+    public function binding(){
+        return $this->belongsTo(Binding::class);
     }
 }
