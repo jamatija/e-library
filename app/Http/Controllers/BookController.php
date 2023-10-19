@@ -123,4 +123,10 @@ class BookController extends BaseController
     {
         //
     }
+
+    public function bookSpecifications(Book $book){
+
+        return view('book.specifications', compact('book'));
+    }
+
 }

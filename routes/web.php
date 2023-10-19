@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/authors', AuthorController::class);
     Route::delete('authors/bulk-delete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
     Route::resource('/books', BookController::class);
+    Route::get('/books-specifications', [BookController::class, 'bookSpecifications'])->name('books.specs');
 
 
     // SETTINGS

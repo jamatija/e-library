@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
+@section('title', 'Knjige')
 
 @section('content')
 
-            <div class="heading">
+<div class="heading">
                 <div class="flex flex-row justify-between border-b-[1px] border-[#e4dfdf]">
                     <div class="py-[10px] flex flex-row">
                         <div class="w-[77px] pl-[30px]">
-                            <img src="/images/user.jpg" alt="">
+                            <img src="img/tomsojer.jpg" alt="">
                         </div>
                         <div class="pl-[15px]  flex flex-col">
                             <div>
                                 <h1>
-                                   {{ $book->title }}
+                                    {{ $book->title }}
                                 </h1>
                             </div>
                             <div>
@@ -27,7 +28,8 @@
                                             <span class="mx-2">/</span>
                                         </li>
                                         <li>
-                                            <a href="knjigaOsnovniDetalji.php" class="text-[#a7a7a7]">
+                                            <a href="knjigaOsnovniDetalji.php"
+                                                class="text-[#2196f3] hover:text-blue-600">
                                                 KNJIGA-467
                                             </a>
                                         </li>
@@ -53,17 +55,24 @@
                             <i class="far fa-calendar-check mr-[3px] "></i>
                             Rezervisi knjigu
                         </a>
-                        <p class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsKnjigaOsnovniDetalji hover:text-[#606FC7]">
-                            <i class="fas fa-ellipsis-v"></i>
+                        <p class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsKnjigaSpecifikacija hover:text-[#606FC7]">
+                            <i
+                                class="fas fa-ellipsis-v"></i>
                         </p>
-                        <div class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjiga-osnovni-detalji">
-                            <div class="absolute right-0 w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+                        <div
+                            class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjiga-specifikacija">
+                            <div class="absolute right-0 w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
                                 <div class="py-1">
-                                    <a href="editKnjiga.php" tabindex="0" class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600" role="menuitem">
+                                    <a href="editKnjiga.php" tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem">
                                         <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                         <span class="px-4 py-0">Izmijeni knjigu</span>
                                     </a>
-                                    <a href="#" tabindex="0" class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600" role="menuitem">
+                                    <a href="#" tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem">
                                         <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
                                         <span class="px-4 py-0">Izbrisi knjigu</span>
                                     </a>
@@ -76,10 +85,10 @@
             <div class="flex flex-row overflow-auto height-osnovniDetalji">
                 <div class="w-[80%]">
                     <div class="border-b-[1px] py-4 text-gray-500 border-[#e4dfdf] pl-[30px]">
-                        <a href="knjigaOsnovniDetalji.php" class="inline active-book-nav hover:text-blue-800">
+                        <a href="knjigaOsnovniDetalji.php" class="inline hover:text-blue-800">
                             Osnovni detalji
                         </a>
-                        <a href="{{ route('books.specs', $book->id) }}" class="inline ml-[70px] hover:text-blue-800 ">
+                        <a href="knjigaSpecifikacija.php" class="inline ml-[70px] active-book-nav hover:text-blue-800">
                             Specifikacija
                         </a>
                         <a href="iznajmljivanjeIzdate.php" class="inline ml-[70px] hover:text-blue-800">
@@ -95,44 +104,29 @@
                             <div class="flex flex-row justify-between">
                                 <div class="mr-[30px]">
                                     <div class="mt-[20px]">
-                                        <span class="text-gray-500 text-[14px]">Naziv knjige</span>
-                                        <p class="font-medium">{{ $book->title }}</p>
+                                        <span class="text-gray-500 text-[14px]">Broj strana</span>
+                                        <p class="font-medium">{{ $book->page_count }}</p>
                                     </div>
                                     <div class="mt-[40px]">
-                                        <span class="text-gray-500 text-[14px]">Kategorija</span>
-                                        @foreach($book->categories as $category)
-                                            <p class="font-medium">{{ $category->name }}</p>
-                                        @endforeach
+                                        <span class="text-gray-500 text-[14px]">Pismo</span>
+                                        <p class="font-medium">Cirilica</p>
                                     </div>
                                     <div class="mt-[40px]">
-                                        <span class="text-gray-500 text-[14px]">Zanr</span>
-                                        @foreach($book->genres as $genre)
-                                            <p class="font-medium">{{ $genre->name }}</p>
-                                        @endforeach
+                                        <span class="text-gray-500 text-[14px]">Jezik</span>
+                                        <p class="font-medium">Crnogorski</p>
                                     </div>
                                     <div class="mt-[40px]">
-                                        <span class="text-gray-500 text-[14px]">Autor/ri</span>
-                                        @foreach($book->authors as $author)
-                                            <p class="font-medium">{{ $author->name }}</p>
-                                        @endforeach
+                                        <span class="text-gray-500 text-[14px]">Povez</span>
+                                        <p class="font-medium">Tvrd</p>
                                     </div>
                                     <div class="mt-[40px]">
-                                        <span class="text-gray-500 text-[14px]">Izdavac</span>
-                                        <p class="font-medium">{{ $book->publisher->name }}</p>
+                                        <span class="text-gray-500 text-[14px]">Format</span>
+                                        <p class="font-medium">21 cm</p>
                                     </div>
                                     <div class="mt-[40px]">
-                                        <span class="text-gray-500 text-[14px]">Godina izdavanja</span>
-                                        <p class="font-medium">{{ $book->publish_date }}</p>
-                                    </div>
-                                </div>
-                                <div class="mr-[70px] mt-[20px] flex flex-col max-w-[600px]">
-                                    <div>
-                                        <h4 class="text-gray-500 ">
-                                            Storyline (Kratki sadrzaj)
-                                        </h4>
-                                        <p class="addReadMore showlesscontent my-[10px]">
-                                        {{ $book->description }}
-                                        </p>
+                                        <span class="text-gray-500 text-[14px]">International Standard Book Number
+                                            (ISBN)</span>
+                                        <p class="font-medium">1546213456878</p>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +152,7 @@
                                     <a href="iznajmljivanjeIzdate.php"><p
                                     class=" mt-[16px] bg-blue-200 text-blue-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
                                     102 primjerka</p></a>
-                                    <a href="iznajmljivanjePrekoracenje.php">  <p
+                                    <a href="iznajmljivanjePrekoracenje.php"> <p
                                     class=" mt-[16px] bg-red-200 text-red-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
                                     2 primjerka</p></a>
                                 <p
@@ -259,7 +253,8 @@
                             </div>
                         </div>
                         <div class="mt-[40px]">
-                            <a href="dashboardAktivnost.php?knjiga=Tom Sojer" class="text-[#2196f3] hover:text-blue-600">
+                            <a href="dashboardAktivnost.php?knjiga=Tom Sojer"
+                                class="text-[#2196f3] hover:text-blue-600">
                                 <i class="fas fa-history"></i> Prikazi sve
                             </a>
                         </div>
@@ -267,5 +262,4 @@
                 </div>
             </div>
 
-
-@endsection('content')
+@endsection
