@@ -70,7 +70,7 @@
                     </td>
 
                     <td class="flex flex-row items-center px-4 py-3">
-                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset($item->picture) }}" alt="default image" />
+                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset('/storage/'.$item->picture) }}" alt="default image" />
                         <a href="">
                             <span class="mr-2 font-medium text-center">{{ $item->title ?? $item->name}}</span>
                         </a>
