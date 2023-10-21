@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\BookImage;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
@@ -53,6 +54,7 @@ class BookController extends BaseController
         $validatedData = $request->validated();
         $book = new Book();
         $book->fill($validatedData);
+        
     
         $authorsId = explode(',', $request->input('authors'));
         $genresId = explode(',', $request->input('genres'));
@@ -84,17 +86,34 @@ class BookController extends BaseController
             $book->binding()->associate($binding);
             $book->publisher()->associate($publisher);
         }
+       
+        $chosenProfileImage = $request->chosen_image ?? 0;
 
-
-        if($request->file('image')){
-
-            foreach($request->file('image') as $img){
-               $imgPath = Storage::disk('public')->put('books', $img);
-                $book['picture'] = $imgPath;
-            }
+        $images = $request->file('image');
+        
+        if($images && count($images) >= $chosenProfileImage){
+            $profileImgPath = Storage::disk('public')->put('books/profile', $images[ $chosenProfileImage]);
+            $book['profile_img'] = $profileImgPath;
         }
+    
 
         $book->save();   
+
+    
+        if($request->file('image')){
+
+            $imagePaths = [];
+
+            foreach($request->file('image') as $img){
+               $path = Storage::disk('public')->put('books', $img);
+               $imagePaths[] = $path;
+                
+               // Kreiraj novi zapis u tabeli books_image
+               $bookImage = new BookImage(['path' => $path]);
+               $book->images()->save($bookImage);
+            }
+        }
+        
 
         return redirect()->route('books.index');
     
@@ -142,4 +161,15 @@ class BookController extends BaseController
         return view('book.specifications', compact('book'));
     }
 
+    public function bookMultimedia($book){
+        
+        $book = Book::find($book);
+        $images = $book->images();
+
+        foreach($images as $img) {
+            echo $img->path;
+        }        
+        
+        return view('book.multimedia', compact('book', 'images'));
+}
 }

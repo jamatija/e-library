@@ -85,7 +85,7 @@
                         <a href="iznajmljivanjeIzdate.php" class="inline ml-[70px] hover:text-blue-800">
                             Evidencija iznajmljivanja
                         </a>
-                        <a href="evidencijaKnjigaMultimedija.php" class="inline ml-[70px] hover:text-blue-800">
+                        <a href="{{ route('books.multimedia', $book->id) }}" class="inline ml-[70px] hover:text-blue-800">
                             Multimedija
                         </a>
                     </div>

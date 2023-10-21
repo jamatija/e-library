@@ -43,4 +43,9 @@ class Book extends Model
     public function binding(){
         return $this->belongsTo(Binding::class);
     }
+
+    public function images()
+    {
+        return $this->hasMany(BookImage::class);
+    }
 }

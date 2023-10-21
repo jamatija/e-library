@@ -455,7 +455,7 @@
                                             <!-- Checkbox -->
                                             <input
                                                 class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
-                                                type="radio" name="chosen_image" />
+                                                type="radio" name="chosen_image" :value="index"/>
                                             <!-- End checkbox -->
                                             <button
                                                 class="absolute bottom-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
