@@ -85,7 +85,7 @@
             <div class="flex flex-row overflow-auto height-osnovniDetalji">
                 <div class="w-[80%]">
                     <div class="border-b-[1px] py-4 text-gray-500 border-[#e4dfdf] pl-[30px]">
-                        <a href="knjigaOsnovniDetalji.php" class="inline hover:text-blue-800">
+                        <a href="{{ route('books.show', $book->id) }}" class="inline hover:text-blue-800">
                             Osnovni detalji
                         </a>
                         <a href="knjigaSpecifikacija.php" class="inline ml-[70px] active-book-nav hover:text-blue-800">
@@ -109,24 +109,24 @@
                                     </div>
                                     <div class="mt-[40px]">
                                         <span class="text-gray-500 text-[14px]">Pismo</span>
-                                        <p class="font-medium">Cirilica</p>
+                                        <p class="font-medium">{{ $book->script->name }}</p>
                                     </div>
                                     <div class="mt-[40px]">
                                         <span class="text-gray-500 text-[14px]">Jezik</span>
-                                        <p class="font-medium">Crnogorski</p>
+                                        <p class="font-medium">JEZIK</p>
                                     </div>
                                     <div class="mt-[40px]">
                                         <span class="text-gray-500 text-[14px]">Povez</span>
-                                        <p class="font-medium">Tvrd</p>
+                                        <p class="font-medium">{{ $book->binding->name }}</p>
                                     </div>
                                     <div class="mt-[40px]">
                                         <span class="text-gray-500 text-[14px]">Format</span>
-                                        <p class="font-medium">21 cm</p>
+                                        <p class="font-medium">{{ $book->size->name }}</p>
                                     </div>
                                     <div class="mt-[40px]">
                                         <span class="text-gray-500 text-[14px]">International Standard Book Number
                                             (ISBN)</span>
-                                        <p class="font-medium">1546213456878</p>
+                                        <p class="font-medium">{{ $book->isbn }}</p>
                                     </div>
                                 </div>
                             </div>

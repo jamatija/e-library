@@ -36,7 +36,7 @@
 
     <!-- Space for content -->
     <div class="scroll height-content section-content">
-        <form class="text-gray-700 forma" action="{{ route('books.store') }}" method="POST">
+        <form class="text-gray-700 forma" action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-row ml-[30px]">
                 <div class="w-[50%]">
@@ -425,7 +425,7 @@
                             class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
                             <div x-ref="dnd"
                                 class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                                <input accept="*" type="file" multiple
+                                <input accept="*" type="file" name="image[]" multiple
                                     class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                                     @change="addFiles($event)"
                                     @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"

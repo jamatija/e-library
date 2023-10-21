@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
@@ -83,11 +83,22 @@ class BookController extends BaseController
             $book->script()->associate($script);
             $book->binding()->associate($binding);
             $book->publisher()->associate($publisher);
-            $book->save();
         }
-    
+
+
+        if($request->file('image')){
+
+            foreach($request->file('image') as $img){
+               $imgPath = Storage::disk('public')->put('books', $img);
+                $book['picture'] = $imgPath;
+            }
+        }
+
+        $book->save();   
+
         return redirect()->route('books.index');
-    }
+    
+}
     
 
     /**
@@ -124,7 +135,9 @@ class BookController extends BaseController
         //
     }
 
-    public function bookSpecifications(Book $book){
+    public function bookSpecifications($book){
+        
+        $book = Book::find($book);
 
         return view('book.specifications', compact('book'));
     }

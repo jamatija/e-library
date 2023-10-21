@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
+    const DEFAULT_BOOK_PICTURE_PATH = 'images/book.jpg';
     
     protected $fillable = ['title', 'isbn', 'total_count', 'page_count', 'publish_date', 'description'];
 

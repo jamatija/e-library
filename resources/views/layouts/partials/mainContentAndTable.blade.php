@@ -11,7 +11,7 @@
         <a href="{{ route($resourcePlural . '.create') }}" class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
             <i class="fas fa-plus mr-[15px]"></i> New {{ $resourceName }}
         </a>
-        <div class="inline-block items-center">
+        <div class="items-center inline-block">
             <div class="relative text-gray-600 focus-within:text-gray-400">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
@@ -49,7 +49,7 @@
                         </th>
                     @elseif($header === "Category")
                         <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}<a href="#"><i
-                                    class="ml-3 fas fas fa-filter" onclick="sortTable()"></i></a>
+                                    class="ml-3 fas fa-filter" onclick="sortTable()"></i></a>
                         </th>
                     @else
                         <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}
@@ -70,8 +70,8 @@
                     </td>
 
                     <td class="flex flex-row items-center px-4 py-3">
-                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset('/storage/'.$item->picture) }}" alt="" />
-                        <a href="autorProfile.php">
+                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset($item->picture) }}" alt="default image" />
+                        <a href="">
                             <span class="mr-2 font-medium text-center">{{ $item->title ?? $item->name}}</span>
                         </a>
                     </td>
@@ -136,7 +136,7 @@
             </tbody>
         </table>
 
-        <div class=" flex-row items-center justify-end mt-2">
+        <div class="flex-row items-center justify-end mt-2 ">
             {{ $items->links() }}
         </div>
     </div>
