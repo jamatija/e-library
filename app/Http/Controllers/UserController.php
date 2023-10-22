@@ -8,12 +8,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    protected $userRoleID;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $users = User::where('role_id', $this->userRoleID)->get();
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -21,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //  
     }
 
     /**
@@ -63,4 +67,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

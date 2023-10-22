@@ -35,7 +35,7 @@
                 <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap" title="Students">
-                            <a href="#" aria-label="Students">
+                            <a href="{{ route('students.index') }}" aria-label="Students">
                                 <i
                                     class="text-[22px] pt-[4px] pb-[5px] mr-1 transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fa-solid fa-user-graduate"></i>
                                 <div class="hidden sidebar-item">

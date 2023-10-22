@@ -13,6 +13,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\StudentController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +43,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // CRUDS
+    // AUTHORS
     Route::resource('/authors', AuthorController::class);
     Route::delete('authors/bulk-delete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
+
+    //BOOKS
     Route::get('/books/{id}/specifications', [BookController::class, 'bookSpecifications'])->name('books.specs');
     Route::get('/books/{id}/multimedia', [BookController::class, 'bookMultimedia'])->name('books.multimedia');
     Route::resource('/books', BookController::class);
+
+    //STUDENT
+    Route::resource('/students', StudentController::class);
 
 
     // SETTINGS
