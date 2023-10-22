@@ -10,6 +10,7 @@ use App\Http\Controllers\BindingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\SizeController;
@@ -54,6 +55,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //STUDENT
     Route::resource('/students', StudentController::class);
+
+    //LIBRARIAN
+    Route::resource('/librarians', LibrarianController::class);
 
 
     // SETTINGS

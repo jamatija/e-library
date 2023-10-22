@@ -104,7 +104,7 @@
                 <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap" title="Librarians">
-                            <a href="#" aria-label="Librarians">
+                            <a href="{{ route('librarians.index') }}" aria-label="Librarians">
                                 <i
                                     class="text-[22px] pt-[4px] pb-[5px] pr-2 text-[#707070] fa-solid fa-user-tie transition duration-300 ease-in group-hover:text-blue-600"></i>
                                 <div class="hidden sidebar-item">
