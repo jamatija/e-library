@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Client\Request as ClientRequest;
@@ -20,8 +21,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('role_id', $this->userRoleID)->get();
+        $roleName = Role::find($this->userRoleID)->name;
 
-        return view('users.index', compact('users'));
+        $resource = strtolower($roleName);
+        $resourcePlural = strtolower($roleName) . 's';
+
+        return view('users.index', compact('users', 'resource', 'resourcePlural'));
     }
 
     /**
@@ -29,7 +34,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roleName = Role::find($this->userRoleID)->name;
+        
+        $role = $this->userRoleID;
+        $resource = strtolower($roleName);
+        $resourcePlural = strtolower($roleName) . 's';
+
+        return view('users.create', compact('resource', 'resourcePlural', 'role'));
     }
 
     /**
@@ -40,21 +51,26 @@ class UserController extends Controller
         
         $validatedData =$request->validated();
         
-        $user = User::create([
-            'name'=> $validatedData['name'],
-            'email'=> $validatedData['email'],
-            'jmbg' => $validatedData['jmbg'],
-            'password'=> Hash::make($validatedData['password']),
-        ]);
-
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $img_path = Storage::disk('public')->put('Users', $image);
-            $user->update(['picture' => $img_path]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $photoPath = Storage::disk('public')->put('users', $file);
+            $validatedData['picture'] = $photoPath;
         }
+    
 
-
-        return redirect()->action([StudentController::class, 'index']);  
+        $user = new User();
+        $user->role_id = $validatedData['type_of_user'];
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->jmbg = $validatedData['jmbg'];
+        $user->picture = $validatedData['picture'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->save();  
+       
+        //Get class name, generate route 
+        $roleName = Role::find($validatedData['type_of_user'])->name;
+        $resource = strtolower($roleName) . 's';
+        return redirect()->route($resource.'.index');  
     }
 
     /**
@@ -84,10 +100,18 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+ 
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();    
+
+        $roleName = Role::find($user->role_id)->name;
+        $resource = strtolower($roleName) . 's';
+
+        return redirect()->route($resource.'.index');    
     }
+
 
 
 }
