@@ -11,18 +11,21 @@ use App\Models\User;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
-class UserController extends Controller
+class UserController extends BaseController
 {
 
     protected $userRoleID;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role_id', $this->userRoleID)->get();
-        $roleName = Role::find($this->userRoleID)->name;
+        $query = User::where('role_id', $this->userRoleID);
 
+        $users = $this->processIndexData($request, $query);
+
+        //Variables for view
+        $roleName = Role::find($this->userRoleID)->name;
         $resource = strtolower($roleName);
         $resourcePlural = strtolower($roleName) . 's';
 

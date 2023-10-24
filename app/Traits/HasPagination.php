@@ -32,6 +32,7 @@ trait HasPagination
         $orderDir = $request->orderDir ?? $this->orderDir;
         $page = $request->page;
 
+
         // Order, filter and paginate data
         $this->order($query, $orderBy, $orderDir);
 
@@ -62,7 +63,7 @@ trait HasPagination
      * Orders data for index page.
      */
     protected function order($query, $orderBy, $orderDir)
-    {
+    {   
         $query->orderBy($orderBy, $orderDir);
     }
 

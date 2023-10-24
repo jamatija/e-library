@@ -42,7 +42,7 @@
                                         </label>
                                     </td>
                                     <td class="flex flex-row items-center px-4 py-4">
-                                        <img class="object-cover w-8 h-8 mr-2 rounded-full" src="img/profileStudent.jpg" alt=""/>
+                                        <img class="object-cover w-8 h-8 mr-2 rounded-full" src="{{ asset('/storage/'.$user->picture) }}" alt="profile image"/>
                                         <a href="ucenikProfile.php">
                                             <span class="font-medium text-center">{{ $user->name }}</span>
                                         </a>
@@ -142,5 +142,8 @@
                         </div>   
                     </div>
 
+                    <div class="flex-row items-center justify-end mt-2 ">
+                    {{ $users->links() }}
+                </div>
                 </div>
             </div>
