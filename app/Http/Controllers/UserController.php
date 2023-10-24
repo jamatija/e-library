@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
@@ -33,7 +37,24 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        
+        $validatedData =$request->validated();
+        
+        $user = User::create([
+            'name'=> $validatedData['name'],
+            'email'=> $validatedData['email'],
+            'jmbg' => $validatedData['jmbg'],
+            'password'=> Hash::make($validatedData['password']),
+        ]);
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $img_path = Storage::disk('public')->put('Users', $image);
+            $user->update(['picture' => $img_path]);
+        }
+
+
+        return redirect()->action([StudentController::class, 'index']);  
     }
 
     /**
@@ -67,5 +88,6 @@ class UserController extends Controller
     {
         //
     }
+
 
 }

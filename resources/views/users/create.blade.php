@@ -10,14 +10,14 @@
             <div class="pl-[30px] py-[10px] flex flex-col">
                 <div>
                     <h1>
-                        Ime Prezime
+                        Novi Ucenik
                     </h1>
                 </div>
                 <div>
                     <nav class="w-full rounded">
                         <ol class="flex list-reset">
                             <li>
-                                <a href="{{ route('books.index') }}" class="text-[#2196f3] hover:text-blue-600">
+                                <a href="{{ route('students.index') }}" class="text-[#2196f3] hover:text-blue-600">
                                     Evidencija ucenika
                                 </a>
                             </li>
@@ -55,6 +55,7 @@
                                         Ucenik
                                     </option>
                                 </select>
+                                <input type="hidden" name="type_of_user" value="customer">
                             </div>
 
                             <div class="mt-[20px]">
@@ -69,11 +70,14 @@
                                 <div id="validateEmailUcenik"></div>
                             </div>
 
+                            {{--
                             <div class="mt-[20px]">
                                 <span>Korisnicko ime <span class="text-red-500">*</span></span>
                                 <input type="text" name="username" id="usernameUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsUsernameUcenik()"/>
                                 <div id="validateUsernameUcenik"></div>
                             </div>
+                            --}}
+
 
                             <div class="mt-[20px]">
                                 <span>Sifra <span class="text-red-500">*</span></span>
@@ -83,7 +87,7 @@
 
                             <div class="mt-[20px]">
                                 <span>Ponovi sifru <span class="text-red-500">*</span></span>
-                                <input type="password" name="ppassword" id="pw2Ucenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2Ucenik()"/>
+                                <input type="password" name="password_confirmation" id="pw2Ucenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2Ucenik()"/>
                                 <div id="validatePw2Ucenik"></div>
                             </div>
                         </div>
@@ -98,9 +102,9 @@
                                             <polyline points="21 15 16 10 5 21"></polyline>
                                         </svg>
                                         <span class="px-4 py-2 mt-2 leading-normal">Add photo</span>
-                                        <input type='file' class="hidden" :accept="accept" onchange="loadFileStudent(event)" />
+                                        <input type='file' name="image" class="hidden" :accept="accept" onchange="loadFileStudent(event)" />
                                     </div>
-                                    <img id="image-output-student" class="hidden absolute w-48 h-[188px] bottom-0" />	
+                                    <img id="image-output-student" cl   ass="hidden absolute w-48 h-[188px] bottom-0" />	
                                 </div>
                             </label>  
                         </div>
@@ -123,6 +127,17 @@
                     
                 </form>
             </div>
+
+
+            @if($errors->any())
+                <div>
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
 
 @endsection('content')
