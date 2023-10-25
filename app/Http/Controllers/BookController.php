@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\BookImage;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
+use App\Models\BookImage;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Genre;
@@ -89,30 +89,26 @@ class BookController extends BaseController
        
         $chosenProfileImage = $request->chosen_image ?? 0;
 
+        if($request->hasFile('image')){
+
         $images = $request->file('image');
         
-        if($images && count($images) >= $chosenProfileImage){
+        if(count($images) >= $chosenProfileImage){
             $profileImgPath = Storage::disk('public')->put('books/profile', $images[ $chosenProfileImage]);
-            $book['profile_img'] = $profileImgPath;
+            $book['picture'] = $profileImgPath;
         }
     
 
         $book->save();   
 
-    
-        if($request->file('image')){
+        foreach($images as $img){
+            $path = Storage::disk('public')->put('books', $img);
 
-            $imagePaths = [];
-
-            foreach($request->file('image') as $img){
-               $path = Storage::disk('public')->put('books', $img);
-               $imagePaths[] = $path;
-                
-               // Kreiraj novi zapis u tabeli books_image
-               $bookImage = new BookImage(['path' => $path]);
-               $book->images()->save($bookImage);
-            }
+            // Kreiraj novi zapis u tabeli books_image
+            $bookImage = new BookImage(['path' => $path]);
+            $book->images()->save($bookImage);
         }
+    }
         
 
         return redirect()->route('books.index');
@@ -151,7 +147,35 @@ class BookController extends BaseController
      */
     public function destroy(Book $book)
     {
-        //
+        //Ako nije defaultna slika obrisi je
+        if(!empty($book->picture) && $book->picture != Book::DEFAULT_BOOK_PICTURE_PATH){
+            Storage::delete($book->picture);
+            
+            $images = $book->images;
+
+            foreach($images as $img){ 
+                $path = $img->path;
+                Storage::delete($path); 
+            }
+            //Obrisi sve slike vezane za tu knjigu
+            $book->images()->delete();
+        }  
+
+        //Brisanje one to many relacije
+        $book->size()->dissociate();
+        $book->script()->dissociate();
+        $book->binding()->dissociate();
+        $book->publisher()->dissociate();
+
+
+        //Brisanje many to many relacije
+        $book->authors()->detach();
+        $book->genres()->detach();
+        $book->categories()->detach();
+
+        $book->delete();
+
+        return redirect()->route('books.index');
     }
 
     public function bookSpecifications($book){
