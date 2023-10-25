@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
                 'role_id' => 3,
                 'jmbg' => '3',
                 'picture' => User::DEFAULT_USER_PICTURE_PATH
-            ]
+            ]            
         ]);
     }
 }

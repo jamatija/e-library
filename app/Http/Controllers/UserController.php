@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Client\Request as ClientRequest;
+// use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 class UserController extends BaseController
 {
@@ -102,9 +103,33 @@ class UserController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $user = User::find($id);    
+        $validatedData = $request->validated();
+
+        dd($validatedData); 
+
+        //Ako je dodata nova slika sacuvaj putanju
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $photoPath = Storage::disk('public')->put('users', $file);
+            $user->picture = $photoPath;
+        }
+
+        if (isset($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']);
+        }
+
+        // Ažuriranje postojećih podataka
+        // $user->update($validatedData);
+
+
+        // Get class name, generate route
+        $roleName = Role::find($user->role_id)->name;
+        $resource = strtolower($roleName) . 's';
+
+        return redirect()->route($resource . '.index');
     }
 
     /**
@@ -125,6 +150,14 @@ class UserController extends BaseController
         $resource = strtolower($roleName) . 's';
 
         return redirect()->route($resource.'.index');    
+    }
+
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->orWhere('email', 'LIKE', "%$searchTerm%");
+        }
     }
 
 }

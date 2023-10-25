@@ -135,7 +135,7 @@ class BookController extends BaseController
      */
     public function edit(Book $book)
     {
-        //
+        return view('book.edit', compact('book'));   
     }
 
     /**
@@ -171,5 +171,15 @@ class BookController extends BaseController
         }        
         
         return view('book.multimedia', compact('book', 'images'));
-}
+    }
+
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('title', 'LIKE', "%$searchTerm%");
+            $query->orWhere('isbn', 'LIKE', "%$searchTerm%");
+        }
+    }
+
+ 
 }

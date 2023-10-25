@@ -11,7 +11,9 @@
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                                 </button>
                             </span>
-                            <input type="search" name="q" class="py-2 pl-10 text-sm text-white bg-white rounded-md focus:outline-none focus:bg-white focus:text-gray-900" placeholder="Search..." autocomplete="off">
+                            @include('layouts.partials.search_data', [
+                                            'resourcePlural' => $resourcePlural
+                                    ])
                         </div>
                     </div>
                 </div>
@@ -65,7 +67,7 @@
                                                         <i class="far fa-file mr-[5px] ml-[5px] py-1"></i>
                                                         <span class="px-4 py-0">Pogledaj detalje</span>
                                                     </a>
-                                                    <a href="editUcenik.php" tabindex="0"
+                                                    <a href="{{ route($resourcePlural.'.edit', $user->id) }}" tabindex="0"
                                                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                         role="menuitem">
                                                         <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>

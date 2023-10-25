@@ -54,9 +54,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/books', BookController::class);
 
     //STUDENT
+    Route::post('/students/search', [StudentController::class, 'filter'])->name('students.filter');
     Route::resource('/students', StudentController::class);
 
     //LIBRARIAN
+    Route::post('/librarians/search', [LibrarianController::class, 'filter'])->name('librarians.filter');
     Route::resource('/librarians', LibrarianController::class);
 
 
