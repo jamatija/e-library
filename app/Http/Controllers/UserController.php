@@ -21,7 +21,6 @@ class UserController extends BaseController
     public function index(Request $request)
     {
         $query = User::where('role_id', $this->userRoleID);
-
         $users = $this->processIndexData($request, $query);
 
         //Variables for view

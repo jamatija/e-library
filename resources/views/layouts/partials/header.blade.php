@@ -6,7 +6,7 @@
             <a href="{{ route('dashboard') }}" class="text-[20px] font-medium">
                 <div class="flex items-center">
                     <div class="flex items-center justify-center w-[83px] h-[71px] mx-auto bg-[#4558BE]">
-                        <img src='{{ asset('favicon.ico') }}' class="spin" alt="Icon" width="45px" height="45px">
+                        <img src="{{ asset('favicon.ico') }}" class="spin" alt="Icon" width="45px" height="45px">
                     </div>
                     <h2 class="ml-[10px] text-[25px]">{{ config('app.name') }}</h2>
                 </div>
@@ -20,7 +20,7 @@
 
                 <!-- Notifications Icon -->
                 <div class="relative block" title="Activities">
-                    <a href="#" class="relative inline-block px-3 py-2 focus:outline-none outline-none "
+                    <a href="#" class="relative inline-block px-3 py-2 outline-none focus:outline-none "
                         aria-label="Notification">
                         <div class="flex items-center h-5">
                             <div class="">
@@ -54,14 +54,12 @@
                                 <span class="px-4 py-0 ml-[3px]">Student</span>
                             </a>
                             <a href="#" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm
-                            leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
+                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-book mr-[3px] ml-[5px] py-1"></i>
                                 <span class="px-4 py-0 ml-[5px]">Book</span>
                             </a>
                             <a href="{{ route('authors.create') }}" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm
-                            leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
+                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-user-pen mr-[3px] ml-[5px] py-1"></i>
                                 <span class="px-4 py-0">Author</span>
                             </a>
@@ -84,7 +82,7 @@
                     <a href="#" class="relative inline-block px-3 py-2 focus:outline-none " id="dropdownProfile"
                         aria-label="User profile">
                         <div class="flex items-center h-5 my-2">
-                            <img class="h-[50px] rounded-full" src="#" width="50" alt="User image">
+                            <img class="h-[50px] rounded-full" src="{{ asset('/storage/'.Auth::user()->picture) }}" width="50" alt="User image">
                         </div>
                     </a>
                 </div>

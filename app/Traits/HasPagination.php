@@ -32,7 +32,6 @@ trait HasPagination
         $orderDir = $request->orderDir ?? $this->orderDir;
         $page = $request->page;
 
-
         // Order, filter and paginate data
         $this->order($query, $orderBy, $orderDir);
 
@@ -64,7 +63,7 @@ trait HasPagination
      */
     protected function order($query, $orderBy, $orderDir)
     {   
-        $query->orderBy($orderBy, $orderDir);
+       $query->orderBy($orderBy, $orderDir);
     }
 
     /**
@@ -75,5 +74,6 @@ trait HasPagination
         if (!empty($searchTerm)){
             $query->where('name', 'LIKE', "%$searchTerm%");
         }
+        return $query;
     }
 }
