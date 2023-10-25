@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Učenici')
+@section('title', $resourcePlural)
 
 @section('content')
 

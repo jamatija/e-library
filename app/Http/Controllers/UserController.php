@@ -78,17 +78,25 @@ class UserController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $user = User::find($id);    
+        $roleName = Role::find($user->role_id)->name;
+        $resource = strtolower($roleName);
+        $resourcePlural = strtolower($resource) .'s';
+        return view('users.show', compact('user', 'resource', 'resourcePlural'));   
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::find($id);    
+        $roleName = Role::find($user->role_id)->name;
+        $resource = strtolower($roleName);
+        $resourcePlural = strtolower($resource) .'s';
+        return view('users.edit', compact('user', 'resource', 'resourcePlural'));   
     }
 
     /**
@@ -106,7 +114,7 @@ class UserController extends BaseController
     public function destroy($id)
     {
         $user = User::find($id);
-        
+
         if(Storage::exists($user->picture) && $user->picture != User::DEFAULT_USER_PICTURE_PATH) {
             Storage::delete($user->picture);
         }

@@ -36,8 +36,8 @@ class UserSeeder extends Seeder
                 'picture' => User::DEFAULT_USER_PICTURE_PATH
             ],
             [
-                'name' => 'Customer',
-                'email' => 'customer@gmail.com',
+                'name' => 'Student',
+                'email' => 'student@gmail.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password'),
                 'role_id' => 3,

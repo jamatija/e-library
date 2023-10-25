@@ -3,7 +3,7 @@
             <div class="pl-[30px] py-[10px] flex flex-col">
                 <div>
                     <h1>
-                        Novi {{$resource}}
+                        {{ $user->name }}
                     </h1>
                 </div>
                 <div>
@@ -37,7 +37,7 @@
                         <div class="w-[50%] mb-[100px]">
                             <div class="mt-[20px]">
                                 <span>Ime i prezime <span class="text-red-500">*</span></span>
-                                <input type="text" name="name" id="imePrezimeUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNameUcenik()"/>
+                                <input type="text" name="name" id="imePrezimeUcenik" value="{{$user->name}}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNameUcenik()"/>
                                 <div id="validateNameUcenik"></div>
                             </div>
 
@@ -48,29 +48,20 @@
                                         {{ $resource }}
                                     </option>
                                 </select>
-                                <input type="hidden" name="type_of_user" value="{{$role}}">
+                                <input type="hidden" name="type_of_user" value="{{$user->role_id}}">
                             </div>
 
                             <div class="mt-[20px]">
                                 <span>JMBG <span class="text-red-500">*</span></span>
-                                <input type="text" name="jmbg" id="jmbgUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsJmbgUcenik()"/>
+                                <input type="text" name="jmbg" value="{{ $user->jmbg }}" id="jmbgUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsJmbgUcenik()"/>
                                 <div id="validateJmbgUcenik"></div>
                             </div>
 
                             <div class="mt-[20px]">
                                 <span>E-mail <span class="text-red-500">*</span></span>
-                                <input type="email" name="email" id="emailUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsEmailUcenik()"/>
+                                <input type="email" name="email" value="{{ $user->email }}" id="emailUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsEmailUcenik()"/>
                                 <div id="validateEmailUcenik"></div>
                             </div>
-
-                            {{--
-                            <div class="mt-[20px]">
-                                <span>Korisnicko ime <span class="text-red-500">*</span></span>
-                                <input type="text" name="username" id="usernameUcenik" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsUsernameUcenik()"/>
-                                <div id="validateUsernameUcenik"></div>
-                            </div>
-                            --}}
-
 
                             <div class="mt-[20px]">
                                 <span>Sifra <span class="text-red-500">*</span></span>
@@ -97,7 +88,7 @@
                                         <span class="px-4 py-2 mt-2 leading-normal">Add photo</span>
                                         <input type='file' name="image" class="hidden" :accept="accept" onchange="loadFileStudent(event)" />
                                     </div>
-                                    <img id="image-output-student" class="hidden absolute w-48 h-[188px] bottom-0" />	
+                                    <img src="{{ asset('/storage/'. $user->picture) }}" id="image-output-student" class="absolute w-48 h-[188px] bottom-0" />	
                                 </div>
                             </label>  
                         </div>
