@@ -17,16 +17,16 @@
                     <nav class="w-full rounded">
                         <ol class="flex list-reset">
                             <li>
-                                <a href="{{ route('students.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                    Evidencija ucenika
+                                <a href="{{ route( $resourcePlural.'.index' ) }}" class="text-[#2196f3] hover:text-blue-600">
+                                    Evidencija {{ $resource.'a' }}
                                 </a>
                             </li>
                             <li>
                                 <span class="mx-2">/</span>
                             </li>
                             <li>
-                                <a href="#" class="text-[#2196f3] hover:text-blue-600">
-                                    Ucenik - 52
+                                <a class="text-[#727272]">
+                                {{ $resource }}
                                 </a>
                             </li>
                         </ol>
@@ -52,7 +52,7 @@
                                 <span>Tip korisnika</span>
                                 <select name="type_of_user" class="flex w-[90%] mt-2 px-2 py-2 border bg-gray-300 border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]" disabled>
                                     <option>
-                                        Ucenik
+                                        {{ $resource }}
                                     </option>
                                 </select>
                                 <input type="hidden" name="type_of_user" value="{{$role}}">
