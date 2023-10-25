@@ -72,7 +72,7 @@ trait HasPagination
     protected function filter($query, $searchTerm)
     {
         if (!empty($searchTerm)){
-            $query->where('name', 'LIKE', "%$searchTerm%");
+           return $query->where('name', 'LIKE', "%$searchTerm%");
         }
         return $query;
     }

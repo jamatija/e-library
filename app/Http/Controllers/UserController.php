@@ -106,6 +106,11 @@ class UserController extends BaseController
     public function destroy($id)
     {
         $user = User::find($id);
+        
+        if(Storage::exists($user->picture) && $user->picture != User::DEFAULT_USER_PICTURE_PATH) {
+            Storage::delete($user->picture);
+        }
+
         $user->delete();    
 
         $roleName = Role::find($user->role_id)->name;
@@ -113,7 +118,5 @@ class UserController extends BaseController
 
         return redirect()->route($resource.'.index');    
     }
-
-
 
 }
