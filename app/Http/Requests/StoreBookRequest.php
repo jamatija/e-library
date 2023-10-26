@@ -33,10 +33,10 @@ class StoreBookRequest extends FormRequest
             'publisher' => 'required|string|exists:publishers,id',
             'publish_date' => 'required|string',
             'total_count' => 'required|integer|min:1',
-            'categories.*' => 'required|exits:categories,id',
-            'genres.*' => 'required|exits:genres,id',
-            'authors.*' => 'required|exits:authors,id',
-            'image .*' => 'required|image|mimes:jpg,png,jpeg,webp',
+            'categories.*' => 'required|exists:categories,id',
+            'genres.*' => 'required|exists:genres,id',
+            'authors.*' => 'required|exists:authors,id',
+            'image .*' => 'sometimes|image|mimes:jpg,png,jpeg,webp',
             'chosen_image' => 'sometimes|integer'
         ];
     }

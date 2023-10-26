@@ -102,11 +102,10 @@
                         <!-- Space for content -->
                         <div class="mt-[20px] mx-0 w-[100%]">
                             <div class="flex flex-row">
-                                <div class="w-[100%]">
+                                <div class="w-[100%]  mb-[100px]">
                                     <div class="w-[90%] mx-auto bg-white rounded p7 mt-[20px]">
                                             <form action="{{ route('books.updateMedia', $book->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                @method('PUT')
                                                     <div x-data="dataFileDnD()"
                                                         class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
                                                         <div x-ref="dnd"
@@ -236,7 +235,9 @@
                                                 </div>
                                                 <!-- </template> -->
                                             </div>
-                                        
+                                        <div>
+                                            <button class="text-white bg-[#4558BE] font-medium rounded-lg px-5 py-2.5 mt-6 " type="submit">Sačuvaj izmjene</button>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>

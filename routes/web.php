@@ -50,7 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //BOOKS
     Route::get('/books/{id}/specifications', [BookController::class, 'bookSpecifications'])->name('books.specs');
-    Route::get('/books/{id}/multimedia', [BookController::class, 'bookMultimedia'])->name('books.multimedia');
+    Route::get('/books/{id}/multimedia', [BookController::class, 'showBookMedia'])->name('books.showMedia');
+    Route::post('/books/{id}/multimedia', [BookController::class, 'updateBookMedia'])->name('books.updateMedia');
     Route::resource('/books', BookController::class);
 
     //STUDENT

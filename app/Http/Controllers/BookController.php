@@ -80,17 +80,16 @@ class BookController extends BaseController
         $publisher = Publisher::find($publisherId);
         $binding = Binding::find($bindingId);
     
-        if ($size && $script && $publisher && $binding) {
-            $book->size()->associate($size);
-            $book->script()->associate($script);
-            $book->binding()->associate($binding);
-            $book->publisher()->associate($publisher);
-        }
+        $book->size()->associate($size);
+        $book->script()->associate($script);
+        $book->binding()->associate($binding);
+        $book->publisher()->associate($publisher);
+        
        
         $chosenProfileImage = $request->chosen_image ?? 0;
 
+        //Ako su uploadovane slike sacuvaj, ako nisu postavi defaultnu sliku
         if($request->hasFile('image')){
-
         $images = $request->file('image');
         
         if(count($images) >= $chosenProfileImage){
@@ -108,6 +107,11 @@ class BookController extends BaseController
             $bookImage = new BookImage(['path' => $path]);
             $book->images()->save($bookImage);
         }
+
+    }else{
+        //Defaultna profila slika
+        $book['picture'] = Book::DEFAULT_BOOK_PICTURE_PATH;
+        $book->save();   
     }
         
 
@@ -131,7 +135,15 @@ class BookController extends BaseController
      */
     public function edit(Book $book)
     {
-        return view('book.edit', compact('book'));   
+        $categories = Category::all();
+        $genres = Genre::all();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $bindings = Binding::all();
+        $sizes = Size::all();
+        $scripts = Script::all();
+
+        return view('book.edit', compact('categories', 'genres', 'authors', 'publishers', 'bindings', 'sizes', 'scripts', 'book'));
     }
 
     /**
@@ -185,17 +197,35 @@ class BookController extends BaseController
         return view('book.specifications', compact('book'));
     }
 
-    public function bookMultimedia($book){
+    public function showBookMedia($book){
         
-        $book = Book::find($book);
-        $images = $book->images();
-
-        foreach($images as $img) {
-            echo $img->path;
-        }        
+        $book = Book::with('images')->find($book);        
         
-        return view('book.multimedia', compact('book', 'images'));
+        return view('book.update_multimedia', compact('book'));
     }
+
+
+    public function updateBookMedia(Request $request, $id){
+
+        //Ako su uploadovane slike sacuvaj, ako nisu postavi defaultnu sliku
+        if($request->hasFile('image')){
+            $images = $request->file('image');
+        
+            foreach($images as $img){
+                $path = Storage::disk('public')->put('books', $img);
+    
+                // Kreiraj novi zapis u tabeli books_image
+                $bookImage = new BookImage(['path' => $path]);
+                
+                $bookImage->book_id = $id;
+    
+                $bookImage->save();
+            } 
+        }
+
+        return redirect()->route('books.index');
+    }
+
 
     protected function filter($query, $searchTerm)
     {
