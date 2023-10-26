@@ -45,11 +45,11 @@
                         </th>
                     @elseif($header === "Author")
                         <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}<a href="#"><i
-                                    class="ml-3 fas fa-filter" onclick="sortTable()"></i></a>
+                                    class="" onclick="sortTable()"></i></a>
                         </th>
                     @elseif($header === "Category")
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}<a href="#"><i
-                                    class="ml-3 fas fa-filter" onclick="sortTable()"></i></a>
+                        <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}<a href=""><i
+                                    class="" onclick="sortTable()"></i></a>
                         </th>
                     @else
                         <th class="px-4 py-4 leading-4 tracking-wider text-left">{{$header}}

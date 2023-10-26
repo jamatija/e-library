@@ -207,6 +207,11 @@ class BookController extends BaseController
 
     public function updateBookMedia(Request $request, $id){
 
+        // $request->validate([
+        //     'image' => 'required', // Bar jedna slika je obavezna
+        //     'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048', // Svaka slika mora biti tipa image i određenih formata
+        // ]);
+    
         //Ako su uploadovane slike sacuvaj, ako nisu postavi defaultnu sliku
         if($request->hasFile('image')){
             $images = $request->file('image');

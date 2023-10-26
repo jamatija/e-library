@@ -235,9 +235,10 @@
                                                 </div>
                                                 <!-- </template> -->
                                             </div>
-                                        <div>
-                                            <button class="text-white bg-[#4558BE] font-medium rounded-lg px-5 py-2.5 mt-6 " type="submit">Sačuvaj izmjene</button>
-                                        </div>
+                                            
+                                            <button id="uploadButton" class="text-white bg-[#4558BE] font-medium rounded-lg px-5 py-2.5 mt-6" type="submit">Sačuvaj izmjene</button>
+
+                                        
                                         </form>
                                     </div>
                                 </div>
@@ -373,5 +374,24 @@
                     </div>
                 </div>
             </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const uploadButton = document.getElementById('uploadButton');
+        const imageInput = document.querySelector('input[name="image[]"]');
+
+        // Sakrij dugme prilikom učitavanja stranice
+        uploadButton.style.display = 'none';
+
+        // Proveri prilikom promene inputa da li su dodate slike i prikaži dugme
+        imageInput.addEventListener('change', function () {
+            if (imageInput.files.length > 0) {
+                uploadButton.style.display = 'block';
+            } else {
+                uploadButton.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 @endsection
