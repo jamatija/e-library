@@ -22,7 +22,6 @@ class BookController extends BaseController
     // Trait for handling images
     use Imageable;
     protected $orderBy = 'title';
-    protected $resultsCount = 0;
 
     /**
      * Display a listing of the resource.

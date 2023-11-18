@@ -12,4 +12,5 @@ class BaseController extends Controller
     protected $orderBy = 'name';
     protected $orderDirArray = ['asc', 'desc'];
     protected $rowsPerPage = 7;
+    protected $resultsCount = 0;
 }

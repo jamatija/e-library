@@ -16,8 +16,9 @@ class SizeController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Size::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.sizes.index', compact('items'));
+        return view('cruds.settings.sizes.index', compact('items', 'resultsCount'));
     }
 
     /**

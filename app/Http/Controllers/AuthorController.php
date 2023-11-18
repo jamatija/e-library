@@ -14,8 +14,6 @@ class AuthorController extends BaseController
     // Trait for handling images
     use Imageable;
 
-    protected $resultsCount = 0;
-
     /**
      * Display a listing of the resource.
      */

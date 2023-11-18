@@ -15,8 +15,9 @@ class LanguageController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Language::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.languages.index', compact('items'));
+        return view('cruds.settings.languages.index', compact('items', 'resultsCount'));
     }
 
     /**

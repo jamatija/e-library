@@ -16,8 +16,9 @@ class BindingController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Binding::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.bindings.index', compact('items'));
+        return view('cruds.settings.bindings.index', compact('items', 'resultsCount'));
     }
 
     /**

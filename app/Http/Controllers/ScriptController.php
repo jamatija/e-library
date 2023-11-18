@@ -16,8 +16,9 @@ class ScriptController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Script::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.scripts.index', compact('items'));
+        return view('cruds.settings.scripts.index', compact('items', 'resultsCount'));
     }
 
     /**

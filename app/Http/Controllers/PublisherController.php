@@ -15,8 +15,9 @@ class PublisherController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Publisher::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.publishers.index', compact('items'));
+        return view('cruds.settings.publishers.index', compact('items', 'resultsCount'));
     }
 
     /**

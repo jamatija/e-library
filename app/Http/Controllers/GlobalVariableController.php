@@ -16,8 +16,9 @@ class GlobalVariableController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, GlobalVariable::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.global_variables.index', compact('items'));
+        return view('cruds.settings.global_variables.index', compact('items', 'resultsCount'));
     }
 
     /**

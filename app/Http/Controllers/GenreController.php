@@ -16,8 +16,9 @@ class GenreController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Genre::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.genres.index', compact('items'));
+        return view('cruds.settings.genres.index', compact('items', 'resultsCount'));
     }
 
     /**

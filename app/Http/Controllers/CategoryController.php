@@ -16,8 +16,9 @@ class CategoryController extends BaseController
     {
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Category::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.settings.categories.index', compact('items'));
+        return view('cruds.settings.categories.index', compact('items', 'resultsCount'));
     }
 
     /**
